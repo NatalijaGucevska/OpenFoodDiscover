@@ -7,10 +7,9 @@ import numpy as np
 
 ACCESS_TOKEN = os.getenv('OPEN_DATA_TOKEN')
 URL = 'https://www.openfood.ch/api/v2/products/_search'
-NUTRIENTS = {'Salt': 0, 'Protein': 0, 'Sugars': 0, 'Carbohydrates': 0, 'Saturated fat': 0, 'Fat': 0, 'Fiber': 0, 'Sodium':0, 'Iodine':0}
-
-
-with open('receipts-details.csv', 'rt') as csvfile:
+NUTRIENTS = dict()
+ 
+with open('receipts-details2.csv', 'rt') as csvfile:
     reader = csv.reader(csvfile, delimiter=';', quotechar='|')
     for row in reader:
         json_data = {'_source': True, 'query': {'match': {'name_translations.fr': row[5]}}}
@@ -21,7 +20,9 @@ with open('receipts-details.csv', 'rt') as csvfile:
         data = json.loads(response.text)['hits']['hits']
         if len(data) > 0:
             for n in (data[0])['_source']['nutrients']:
-                if n['name_en'] != 'Energy (kCal)' and n['name_en']!= 'Energy':
+                if n['name_en'] != 'Energy (kCal)' and n['name_en'] != 'Energy' and n['per_hundred'] is not None:
+                    if n['name_en'] not in NUTRIENTS.keys():
+                        NUTRIENTS[n['name_en']] = 0
                     NUTRIENTS[n['name_en']] += float(n['per_hundred'])
 
 X = np.arange(len(NUTRIENTS.keys()))
