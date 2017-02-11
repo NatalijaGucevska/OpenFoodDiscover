@@ -14775,6 +14775,9 @@ var App = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { id: 'app-app' },
+        propositions.map(function (item) {
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: item.image, style: { display: "none" } });
+        }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_1_react_addons_css_transition_group___default.a,
           {
@@ -14884,11 +14887,6 @@ var _temp = function () {
 
 
 
-var data = [{
-  title: "Celery",
-  img: "celery.jpg"
-}];
-
 function Home(_ref) {
   var router = _ref.router,
       propositions = _ref.propositions,
@@ -14946,8 +14944,6 @@ var _temp = function () {
   if (typeof __REACT_HOT_LOADER__ === 'undefined') {
     return;
   }
-
-  __REACT_HOT_LOADER__.register(data, 'data', 'C:/Users/loic.furhoff/Documents/OpenFoodDiscover/web/src/Home.js');
 
   __REACT_HOT_LOADER__.register(Home, 'Home', 'C:/Users/loic.furhoff/Documents/OpenFoodDiscover/web/src/Home.js');
 }();
@@ -15083,9 +15079,7 @@ function StartTry(_ref) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "h1",
         { className: "vhcenter" },
-        "Today",
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("br", null),
-        " let's try"
+        "Today let's try"
     );
 }
 ;
@@ -15119,7 +15113,7 @@ function StartWelcome(_ref) {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         "h1",
         { className: "vhcenter" },
-        "Welcome Back"
+        "Welcome back"
     );
 }
 ;
