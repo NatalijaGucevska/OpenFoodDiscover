@@ -3,25 +3,29 @@ import csv
 import json
 import requests
 from flask import Flask
+from flask_cors import CORS, cross_origin
+import random
+
 
 app = Flask(__name__)
+CORS(app)
 
 ACCESS_TOKEN = os.getenv('OPEN_DATA_TOKEN')
 URL = 'https://www.openfood.ch/api/v2/products/_search'
-FILE = 'receipts-details1.csv'
+FILE = 'receipts-details.csv'
 NUTRIENTS = dict()
 DAYS = 14.0
 
 # Daily quantities of recommended nutrients in grams
 TARGET_NUTRIENTS = {
+    'Fiber': 30,
     'Protein': 50,
     'Fat': 70,
     'Saturated fat': 24,
     'Carbohydrates': 310,
     'Sugars': 90,
     'Sodium': 2.3,
-    'Salt': 2.3,
-    'Fiber': 30
+    'Salt': 2.3
 }
 
 
@@ -64,14 +68,13 @@ def propose():
                     data = json.loads(response.text)['hits']['hits']
                     if len(data) > 0:
                         id = 0
-                        final = dict()
+                        final = []
                         for product in data:
                             if product['_source']['name_fr'] is not None:
-                                id += 1
-                                final[id] = {
+                                final.append({
                                     'name': product['_source']['name_fr'],
-                                    'image': product['_source']['images'][1]['data']['url']
-                                }
+                                    'image': product['_source']['images'][0]['data']['url']
+                                })
 
 
                     return json.dumps(final)
