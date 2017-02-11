@@ -85,7 +85,7 @@ h1, h2 {
   border-radius:5px;
   object-fit:cover;
   transform-origin: 50% 99%;
-  margin-top: -15%;
+  margin-top: -10%;
 }
 
 .card img{
@@ -139,7 +139,7 @@ button.negativanswer, button.positivanswer{
 button.positivanswer{
   width:100%;
   color: #2ecc71;
-  border: 2px #2ecc71 solid;
+  border-bottom: 3px #2ecc71 solid;
   border-radius: 5px;
   text-decoration: none;
   padding: 10px;
@@ -147,10 +147,14 @@ button.positivanswer{
 button.negativanswer{
   width:100%;
   color: #f4836c;
-  border: 2px #f4836c solid;
+  border-bottom: 3px #f4836c solid;
   border-radius: 5px;
   text-decoration: none;
   padding: 10px;
+}
+
+button.negativanswer:hover, button.negativanswer:focus, button.positivanswer:hover, button.positivanswer:focusw{
+  border-bottom-width: 5px;
 }
 
 .vhcenter{
