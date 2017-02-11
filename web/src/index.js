@@ -10,6 +10,7 @@ import {About} from "./About";
 import {Like} from "./Like";
 import {DontLike} from "./DontLike";
 import {SeeYou} from "./SeeYou";
+import $ from 'jquery';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -17,17 +18,23 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
 
-render((
-    <Router history={browserHistory}>
-        <Route path="/" component={App}>
-          <IndexRoute component={StartLogo} />
-          <Route path="starttry" component={StartTry}/>
-          <Route path="startwelcome" component={StartWelcome}/>
-          <Route path="home" component={Home}/>
-          <Route path="about" component={About}/>
-          <Route path="like" component={Like}/>
-          <Route path="dontlike" component={DontLike}/>
-          <Route path="seeyou" component={SeeYou}/>
-        </Route>
-    </Router>
-), document.getElementById('app'));
+$.get(
+  'https://18e11e4a.ngrok.io/proposition',
+  propositions => {
+    render((
+        <Router history={browserHistory}>
+            <Route path="/" component={(props) => <App propositions={propositions} {...props} />}>
+              <IndexRoute component={StartLogo} />
+              <Route path="starttry" component={StartTry}/>
+              <Route path="startwelcome" component={StartWelcome}/>
+              <Route path="home" component={Home}/>
+              <Route path="about" component={About}/>
+              <Route path="like" component={Like}/>
+              <Route path="dontlike" component={DontLike}/>
+              <Route path="seeyou" component={SeeYou}/>
+            </Route>
+        </Router>
+    ), document.getElementById('app'));
+  },
+  'json'
+);

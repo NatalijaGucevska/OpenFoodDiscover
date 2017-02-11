@@ -1,24 +1,26 @@
 import React from 'react';
-import Cards, { Card } from 'react-swipe-card'
-import { render } from 'react-dom'
-import { Link } from 'react-router'
+import Cards, { Card } from 'react-swipe-card';
+import { render } from 'react-dom';
+import { Link } from 'react-router';
 
 const data = [{
   title: "Celery",
   img: "celery.jpg"
 }]
 
-export function Home({router}) {
+export function Home({router, propositions, onSwipeCard, currentCardIndex}) {
+  console.log(propositions)
+  const current = propositions[currentCardIndex]
     return (
           <div>
-            <Cards onEnd="" className='master-root'>
-              {data.map(item =>
+            <Cards onEnd={ () => onSwipeCard() } className='master-root'>
+              {[current].map(item =>
                   <Card
                     onSwipeLeft={() => router.push("/dontlike")}
                     onSwipeRight={() => router.push("/like")} >
-                    <img src={"img/" + item.img} />
+                    <img src={item.image} />
 
-                    <h2 className="productTitle">{item.title}</h2>
+                    <h2 className="productTitle">{item.name}</h2>
 
                   </Card>
               )}
@@ -31,6 +33,8 @@ export function Home({router}) {
             <button onClick={() => router.push("/like")} className="swipeRight">
               <img className="vhcenter" src="img/handsup.svg"/>
             </button>
+
+
 
           </div>
     );
