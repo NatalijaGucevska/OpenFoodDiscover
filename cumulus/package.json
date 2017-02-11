@@ -1,0 +1,16 @@
+{
+  "name": "cumulus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "loadLoginPage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "moment": "^2.17.1",
+    "phantomjs": "^2.1.7"
+  }
+}
